@@ -4,8 +4,8 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = AppSettings.o Circle.o main.o Rectangle.o tinyxml2.o Helicoptero.o Tiro.o Tranformacao.o Polyline.o Ponto.o
-LINKOBJ  = AppSettings.o Circle.o main.o Rectangle.o tinyxml2.o Helicoptero.o Tiro.o Tranformacao.o Polyline.o Ponto.o
+OBJ      = AppSettings.o Circle.o main.o Rectangle.o tinyxml2.o Helicoptero.o Tiro.o Polyline.o Ponto.o
+LINKOBJ  = AppSettings.o Circle.o main.o Rectangle.o tinyxml2.o Helicoptero.o Tiro.o Polyline.o Ponto.o
 LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/mingw32/lib" -static-libstdc++ -static-libgcc "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libopengl32.a" "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libglu32.a" "C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/libglut32.a"  -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.7.2/include/c++"
@@ -44,9 +44,6 @@ Helicoptero.o: Helicoptero.cpp
 
 Tiro.o: Tiro.cpp
 	$(CPP) -c Tiro.cpp -o Tiro.o $(CXXFLAGS)
-
-Tranformacao.o: Tranformacao.cpp
-	$(CPP) -c Tranformacao.cpp -o Tranformacao.o $(CXXFLAGS)
 
 Polyline.o: Polyline.cpp
 	$(CPP) -c Polyline.cpp -o Polyline.o $(CXXFLAGS)

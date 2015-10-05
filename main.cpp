@@ -136,16 +136,18 @@ void mouse(int button, int state, int x, int y) {
 			appSettings->getHelicoptero()->mudarEscalaMovimento();
 		}
 		if (button == GLUT_LEFT_BUTTON) {
-			appSettings->getHelicoptero()->realizarTiro();
+			appSettings->getHelicoptero()->realizarTiro(appSettings->getTiro());
 		}
 	}
+}
+
+void mouseMove (int x, int y) {
+	appSettings->getHelicoptero()->rotacionarMira(x, y);
 }
 
 int main(int argc, char** argv) {
 	appSettings->loadConfigXML(argv);
 	appSettings->loadSvgFile();
-	
-	//appSettings->showValues();
 
 	// Iniciando tela e demais variáveis
 	glutInit(&argc, argv);
@@ -169,7 +171,7 @@ int main(int argc, char** argv) {
     glutKeyboardUpFunc(keyup);
 
 	glutMouseFunc(mouse);
-//	glutMotionFunc(mouseMove);
+	glutPassiveMotionFunc(mouseMove);
 
 	glutMainLoop();
 

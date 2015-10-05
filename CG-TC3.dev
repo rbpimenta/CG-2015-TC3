@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000001000000
-UnitCount=19
+UnitCount=17
 
 [VersionInfo]
 Major=1
@@ -180,28 +180,8 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit14]
-FileName=Tranformacao.h
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
-[Unit15]
-FileName=Tranformacao.cpp
-CompileCpp=1
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit17]
-FileName=Polyline.cpp
+FileName=Ponto.cpp
 CompileCpp=1
 Folder=
 Compile=1
@@ -211,7 +191,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit16]
-FileName=Polyline.h
+FileName=Ponto.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -232,6 +212,26 @@ BuildCmd=
 
 [Unit19]
 FileName=Ponto.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit14]
+FileName=Polyline.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit15]
+FileName=Polyline.cpp
 CompileCpp=1
 Folder=
 Compile=1

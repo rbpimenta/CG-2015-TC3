@@ -11,12 +11,14 @@ Tiro::Tiro()
 	this->cy = 0.0;
 	this->raio = 0.0;
 	this->anguloGiro = 0.0;
+	this->anguloMira = 0.0;
 	this->posX = 0.0;
 	this->posY = 0.0;
+	this->anguloGiro = 0.0;
 	
 }
 
-Tiro::Tiro(float fatorEscala,  float fatorEscalaInverso, float cx, float cy, float raio, float anguloGiro,	float posX,	float posY) {
+Tiro::Tiro(float fatorEscala,  float fatorEscalaInverso, float cx, float cy, float raio, float anguloGiro, float anguloMira, float miraHeight, float posX,	float posY) {
 	this->velocidadeTiro = 0.0;
 	this->tiro = new Circle();
 	
@@ -26,8 +28,10 @@ Tiro::Tiro(float fatorEscala,  float fatorEscalaInverso, float cx, float cy, flo
 	this->cy = cy;
 	this->raio = raio;
 	this->anguloGiro = anguloGiro;
+	this->anguloMira = anguloMira;
 	this->posX = posX;
 	this->posY = posY;
+	this->miraHeight = miraHeight;
 	
 }
 
@@ -82,17 +86,36 @@ void Tiro::desenharTiro() {
 			// rotacionar o helicoptero em 90º
 			glRotatef(90.0 + this->anguloGiro, 0.0, 0.0, 1.0);
 			
-			this->tiro->desenharCircle(this->tiro->getR(), 0.0, 0.0, 0.0);
+			glPushMatrix();
+				xTranslated = 0.0;
+				yTranslated = this->miraHeight;
+				
+				glTranslatef(xTranslated, yTranslated, 0.0);
+				glRotatef(this->anguloMira, 0.0, 0.0, 1.0);
+				
+				glPushMatrix();
+					xTranslated = 0.0;
+					yTranslated = -this->miraHeight;
+					glTranslatef(xTranslated, yTranslated,0.0);
+				
+					this->tiro->desenharCircle(this->tiro->getR(), 0.0, 0.0, 0.0);
+			glPopMatrix();
 		glPopMatrix();
 	glPopMatrix();
 }
 
 void Tiro::movimentarParaFrente() {
-	this->posX += this->velocidadeTiro*cos(this->anguloGiro*M_PI/180);
-	this->posY += this->velocidadeTiro*sin(this->anguloGiro*M_PI/180);
+	this->posX = this->posX + this->velocidadeTiro*cos(this->anguloGiro*M_PI/180 + this->anguloMira*M_PI/180);
+	this->posY += this->velocidadeTiro*sin(this->anguloGiro*M_PI/180 + this->anguloMira*M_PI/180);
 }
 
 void Tiro::movimentarParaTras() {
-	this->posX -= this->velocidadeTiro*cos(this->anguloGiro*M_PI/180);
-	this->posY -= this->velocidadeTiro*sin(this->anguloGiro*M_PI/180);	
+	this->posX -= this->velocidadeTiro*cos(this->anguloGiro*M_PI/180 + this->anguloMira*M_PI/180);
+	this->posY -= this->velocidadeTiro*sin(this->anguloGiro*M_PI/180 + this->anguloMira*M_PI/180);	
+}
+
+void Tiro::showValues() {
+	cout << "Tiro\n";
+	this->tiro->showValues();
+	cout << "Velocidade Tiro: "<< this->velocidadeTiro << "\n";
 }

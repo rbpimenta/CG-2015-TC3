@@ -241,6 +241,8 @@ void AppSettings::showValues() {
 	for (i = 0; i < this->quantidadeObjetosResgate; i ++) {
 		it->showValues();
 	}
+	
+	this->tiro->showValues();
 }
 
 void AppSettings::checkCircles (Circle* circle) {
@@ -447,7 +449,7 @@ void AppSettings::desenharHelicoptero() {
 	this->helicoptero->mostrarTiros();
 }
 
-void AppSettings::desenharObjetos() {
+void AppSettings::desenharObjetos() {	
 	this->desenharArena();
 	this->desenharPostoAbastecimento();
 	this->desenharJogador();

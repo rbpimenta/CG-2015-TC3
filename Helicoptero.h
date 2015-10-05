@@ -44,6 +44,11 @@ protected:
 	// Tiro
 	vector<Tiro>* tiros;
 	
+	// Mira
+	float anguloMira;
+	float posMiraAnteriorX;
+	float posMiraAnteriorY;
+	
 	// Propriedades do corpo do helicoptero
 	Rectangle* mira;
 	Rectangle* corpo;
@@ -60,9 +65,14 @@ public:
 	void showValues();
 	
 	// Tiro
-	void realizarTiro();
+	void realizarTiro(Tiro* t);
 	void mostrarTiros();
 	void movimentarTiros();
+	
+	// Mira
+	void rotacionarMira (float x, float y);
+	void rotacionarMiraDireita();
+	void rotacionarMiraEsquerda();
 	
 	// Helices
 	void aumentarGiroHelices();

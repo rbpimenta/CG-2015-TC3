@@ -89,6 +89,7 @@ public:
 	void setQuantidadeObjetosResgate (int quantidadeObjetoResgate);
 	
 	Helicoptero* getHelicoptero() {return this->helicoptero;}
+	Tiro* getTiro() {return this->tiro;}
 
 };
 

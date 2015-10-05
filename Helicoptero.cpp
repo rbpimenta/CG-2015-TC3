@@ -26,6 +26,11 @@ Helicoptero::Helicoptero()
 	// Tiros
 	this->tiros = new vector<Tiro>();
 	
+	// mira
+	this->anguloMira = 0.0;
+	this->posMiraAnteriorX = 0.0;
+	this->posMiraAnteriorY = 0.0;
+	
 	// Inicializando variáveis do corpo
 	this->mira = new Rectangle();
 	this->corpo = new Rectangle();
@@ -132,7 +137,20 @@ void Helicoptero::carregarInformacoes() {
 }
 
 void Helicoptero::desenharMira() {
-	this->mira->desenharRectangle(this->mira->getHeight(), this->mira->getWidth(), 0.0, 0.0, 0.0);
+	float xTranslated = 0.0;
+	float yTranslated = this->mira->getHeight();
+	glPushMatrix();
+		// mover-se para a base do corpo
+		glTranslatef(xTranslated, yTranslated, 0.0);
+		glRotatef(this->anguloMira, 0.0, 0.0, 1.0);
+		glPushMatrix();
+			xTranslated = 0.0;
+			yTranslated = -this->mira->getHeight();
+			glTranslatef(xTranslated, yTranslated,0.0);
+
+			this->mira->desenharRectangle(this->mira->getHeight(), this->mira->getWidth(), 0.0, 0.0, 0.0);
+		glPopMatrix();
+
 }
 
 void Helicoptero::desenharCorpo() {
@@ -299,10 +317,47 @@ void Helicoptero::mudarEscalaMovimento() {
 	}
 }
 
-void Helicoptero::realizarTiro() {
-	cout << "Tiro Realizado!\n";
-	Tiro* t = new Tiro(this->fatorEscala, (1/this->fatorEscala), this->cx, this->cy, this->raio, this->anguloGiro, this->posX, this->posY);
-	this->tiros->push_back(*t);
+void Helicoptero::rotacionarMira(float x, float y) {
+	if (posMiraAnteriorX > x) {
+		rotacionarMiraEsquerda();
+	} else {
+		rotacionarMiraDireita();
+	}
+	
+	posMiraAnteriorX = x;
+	posMiraAnteriorY = y;
+}
+
+void Helicoptero::rotacionarMiraDireita() { 
+	if (this->enableMovimento) {
+		if (this->anguloMira > 44) {
+			this->anguloMira = 45;
+		} else {
+	
+			this->anguloMira += (3*this->velocidadeHelicoptero);
+		}
+	}
+}
+
+
+void Helicoptero::rotacionarMiraEsquerda() { 
+	if (this->enableMovimento) {
+		if (this->anguloMira < -44) {
+			this->anguloMira = -45;
+		} else {
+	
+			this->anguloMira -= (3*this->velocidadeHelicoptero);
+		}
+	}
+	
+}
+
+void Helicoptero::realizarTiro(Tiro* t) {
+	if (enableMovimento) {
+		Tiro* novoTiro = new Tiro(this->fatorEscala, (1/this->fatorEscala), this->cx, this->cy, this->raio, this->anguloGiro, this->anguloMira, this->mira->getHeight(),this->posX, this->posY);
+		novoTiro->setTiro(t);
+		this->tiros->push_back(*novoTiro);
+	}
 }
 
 void Helicoptero::mostrarTiros() {
@@ -318,11 +373,11 @@ void Helicoptero::mostrarTiros() {
 
 void Helicoptero::movimentarTiros() {
 	int i = 0;
-	Tiro t;
+	Tiro* t;
 	if (!this->tiros->empty()) {
 		for (i = 0; i < (int) this->tiros->size(); i++) {
-			t = this->tiros->at(i);
-			t.movimentarParaFrente();
+			t = &(this->tiros->at(i));
+			t->movimentarParaFrente();
 		}
 	}
 }
