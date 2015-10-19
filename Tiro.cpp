@@ -99,9 +99,13 @@ void Tiro::desenharTiro() {
 					glTranslatef(xTranslated, yTranslated,0.0);
 				
 					this->tiro->desenharCircle(this->tiro->getR(), 0.0, 0.0, 0.0);
+				/*
+				Add to work on linux
+				glPopMatrix();
+				*/
 			glPopMatrix();
 		glPopMatrix();
-	glPopMatrix();
+	glPopMatrix(); // Escala
 }
 
 void Tiro::movimentarParaFrente() {

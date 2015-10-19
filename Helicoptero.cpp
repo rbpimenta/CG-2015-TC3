@@ -150,7 +150,10 @@ void Helicoptero::desenharMira() {
 
 			this->mira->desenharRectangle(this->mira->getHeight(), this->mira->getWidth(), 0.0, 0.0, 0.0);
 		glPopMatrix();
-
+		/*
+	Add to work on linux
+	glPopMatrix();
+	*/
 }
 
 void Helicoptero::desenharCorpo() {
@@ -334,7 +337,7 @@ void Helicoptero::rotacionarMiraDireita() {
 			this->anguloMira = 45;
 		} else {
 	
-			this->anguloMira += (3*this->velocidadeHelicoptero);
+			this->anguloMira += (5*this->velocidadeHelicoptero);
 		}
 	}
 }
@@ -346,7 +349,7 @@ void Helicoptero::rotacionarMiraEsquerda() {
 			this->anguloMira = -45;
 		} else {
 	
-			this->anguloMira -= (3*this->velocidadeHelicoptero);
+			this->anguloMira -= (5*this->velocidadeHelicoptero);
 		}
 	}
 	
